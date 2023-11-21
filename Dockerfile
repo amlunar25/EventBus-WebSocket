@@ -4,7 +4,7 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
-COPY ["EventBus-WebSocket.csproj", "EventBus-WebSocket/"]
+COPY ["EventBus-WebSocket/EventBus-WebSocket.csproj", "EventBus-WebSocket/"]
 RUN dotnet restore "EventBus-WebSocket/EventBus-WebSocket.csproj"
 COPY . .
 WORKDIR "/src/EventBus-WebSocket"
