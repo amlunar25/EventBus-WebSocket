@@ -1,35 +1,23 @@
-# FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base
-# WORKDIR /app
-# EXPOSE 80
+# https://hub.docker.com/_/microsoft-dotnet
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+WORKDIR /source
 
-# FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
-# WORKDIR /src
-# COPY ["EventBus-WebSocket/EventBus-WebSocket.csproj", "EventBus-WebSocket/"]
-# RUN dotnet restore "EventBus-WebSocket/EventBus-WebSocket.csproj"
-# COPY . .
-# WORKDIR "/src/EventBus-WebSocket"
-# RUN dotnet build "EventBus-WebSocket.csproj" -c Release -o /app/build
+ENV ASPNETCORE_URLS=http://+:8010
 
-# FROM build AS publish
-# RUN dotnet publish "EventBus-WebSocket.csproj" -c Release -o /app/publish
+EXPOSE 8010
 
-# FROM base AS final
-# WORKDIR /app
-# COPY --from=publish /app/publish .
-# ENTRYPOINT ["dotnet", "EventBus-WebSocket.dll"]
-
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build-env
-WORKDIR /App
-
-# Copy everything
-COPY . ./
-# Restore as distinct layers
+# copy csproj and restore as distinct layers
+COPY *.sln .
+COPY EventBus-WebSocket/*.csproj ./EventBus-WebSocket/
 RUN dotnet restore
-# Build and publish a release
-RUN dotnet publish -c Release -o out
 
-# Build runtime image
-FROM mcr.microsoft.com/dotnet/aspnet:7.0
-WORKDIR /App
-COPY --from=build-env /App/out .
-ENTRYPOINT ["dotnet", "DotNet.Docker.dll"]
+# copy everything else and build app
+COPY EventBus-WebSocket/. ./EventBus-WebSocket/
+WORKDIR /source/EventBus-WebSocket
+RUN dotnet publish -c release -o /app --no-restore
+
+# final stage/image
+FROM mcr.microsoft.com/dotnet/aspnet:6.0
+WORKDIR /app
+COPY --from=build /app ./
+ENTRYPOINT ["dotnet", "EventBus-WebSocket.dll"]
