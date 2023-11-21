@@ -4,16 +4,16 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
-COPY ["YourAspNetCoreProject.csproj", "YourAspNetCoreProject/"]
-RUN dotnet restore "YourAspNetCoreProject/YourAspNetCoreProject.csproj"
+COPY ["EventBus-WebSocket.csproj", "EventBus-WebSocket/"]
+RUN dotnet restore "EventBus-WebSocket/EventBus-WebSocket.csproj"
 COPY . .
-WORKDIR "/src/YourAspNetCoreProject"
-RUN dotnet build "YourAspNetCoreProject.csproj" -c Release -o /app/build
+WORKDIR "/src/EventBus-WebSocket"
+RUN dotnet build "EventBus-WebSocket.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "YourAspNetCoreProject.csproj" -c Release -o /app/publish
+RUN dotnet publish "EventBus-WebSocket.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "YourAspNetCoreProject.dll"]
+ENTRYPOINT ["dotnet", "EventBus-WebSocket.dll"]
