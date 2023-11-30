@@ -1,0 +1,55 @@
+﻿{
+  "quote_id": 500,
+  "quote_details": {
+    "handset": {
+      "handset_id": 1,
+      "modify_datetime": "2018-08-28T09:58:00",
+      "item_lookup_code": "MN8L2LL/A",
+      "handset_description": "iPhone 7 Black 128GB",
+      "price_amount": 785.25,
+      "effective_date": "2018-08-28",
+      "status": "A"
+    },
+    "plan": {
+      "plan_id": 1,
+      "plan_name": "Live",
+      "price_amount": 55,
+      "discount_amount": 10.52,
+      "features": {
+        "video_quality": "480p",
+        "tethering_speed": "Available, max 25Mbps",
+        "domestic_ld_minutes": "Pay as you go",
+        "roaming_data": "3GB USA",
+        "autopay": "Included",
+        "modify_datetime": "2023-09-27T09:45:42.223"
+      }
+    },
+    "term": {
+      "agreement_id": 1,
+      "agreement_type": "HPO 3.0",
+      "start_date": "2022-09-27",
+      "end_date": "2025-09-27",
+      "months": 24
+    },
+    "source": "Account360",
+    "details": {
+      "monthly_amount": 56.17,
+      "up_front_payment": 100,
+      "current_device_balance": 300,
+      "trade_in_amount": 400,
+      "total_amount": 1300
+    },
+    "customer_details": {
+      "account_id": "12345",
+      "parent_item_id": "12345",
+      "email_address": "user1@test.com",
+      "customer_firstname": "user1",
+      "customer_lastname": "test1",
+      "phone_number": "6711234597"
+    },
+    "remaining_hpo": {
+      "handset_description": "iPhone 7 Black 128GB",
+      "handset_remaining_amount": 1300
+    }
+  }
+}
