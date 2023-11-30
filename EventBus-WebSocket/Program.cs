@@ -1,13 +1,16 @@
 using EventBus_WebSocket.EventBusHandler;
+using EventBus_WebSocket.Process;
 using WebSocket_V4.WebSocketHandler;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-builder.Services.AddSingleton<EventBus>();
+builder.Services.AddSingleton(new EventBus()); // Crea una unica instancia si ya fue creada para ser utilizada en cualquier parte del programa
+
 //builder.Services.AddSingleton<WebSocket_V4.WebSocketHandler.WebSocketManager>(); // Adding WebSocket
-//builder.Services.AddHostedService<WebSocketBackgroundService>(); // Add Thread
+builder.Services.AddHttpClient();
+builder.Services.AddHostedService<BackgroundTasksService>(); // Add Thread
 
 var app = builder.Build();
 
