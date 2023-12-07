@@ -7,8 +7,8 @@ namespace EventBus_WebSocket.Process
     public class AuthenticationGetAdtransNEs : IProcess
     {
         private readonly EventBus _eventBus;
-        private const string Username = "******";
-        private const string Password = "******";
+        private const string Username = "proactiviti";
+        private const string Password = "gta671644";
 
         //private readonly ILogger _logger;
         public AuthenticationGetAdtransNEs(EventBus eventBus)
